@@ -8,6 +8,7 @@ const Home = () => {
   const { currentUser } = useAuth();
 
   const { posts, handleDelete, handleUpdate } = useContext(PostContext);
+  console.log(posts);
 
   return (
     <div>
@@ -30,7 +31,7 @@ const Home = () => {
 
       <h2>Home Page</h2>
       {/* Render existing posts */}
-      <Postlist />
+
       {/* Render all posts */}
       {posts.map((post, index) => (
         <div key={index}>

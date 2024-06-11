@@ -1,11 +1,11 @@
 import React, { useState, useContext } from "react";
-import { UserContext } from "../App";
 import { PostContext } from "../contexts/PostContext";
+import { AuthContext } from "../contexts/authContext";
 
 const Post = ({ id, username, title, text, timestamp, comments }) => {
   const formattedTimestamp = new Date(timestamp).toLocaleString();
   const [newComment, setNewComment] = useState("");
-  const { currentUser } = useContext(UserContext);
+  const { currentUser } = useContext(AuthContext);
   const { handleAddComment } = useContext(PostContext);
 
   const handleSubmitComment = (e) => {

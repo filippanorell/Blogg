@@ -20,6 +20,12 @@ const Navbar = () => {
           >
             Logout
           </button>
+          <Link className="text-sm text-blue-600 underline" to={"/newpost"}>
+            New post
+          </Link>
+          <Link className="text-sm text-blue-600 underline" to={"/"}>
+            Home
+          </Link>
         </>
       ) : (
         <>
@@ -28,9 +34,6 @@ const Navbar = () => {
           </Link>
           <Link className="text-sm text-blue-600 underline" to={"/register"}>
             Register New Account
-          </Link>
-          <Link className="text-sm text-blue-600 underline" to={"/newpost"}>
-            New post
           </Link>
         </>
       )}

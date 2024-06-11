@@ -1,8 +1,10 @@
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
+import { AuthContext } from "../contexts/authContext/index";
 
 export const PostContext = createContext();
 
 export function PostProvider({ children }) {
+  const { currentUser } = useContext(AuthContext);
   const [posts, setPosts] = useState([
     {
       id: 1,
@@ -24,7 +26,7 @@ export function PostProvider({ children }) {
   const handleSubmit = (formData) => {
     const newPost = {
       id: posts.length + 1,
-      username: currentUser,
+      username: currentUser.email,
       ...formData,
       timestamp: new Date().getTime(),
       comments: [],

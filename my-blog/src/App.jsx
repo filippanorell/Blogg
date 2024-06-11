@@ -12,25 +12,22 @@ import PrivateRoutes from "./components/PrivateRoutes";
 export const UserContext = createContext();
 
 const App = () => {
-  const [currentUser, setCurrentUser] = useState("filippanorell");
-
   return (
-    <UserContext.Provider value={{ currentUser, setCurrentUser }}>
+    <AuthProvider>
       <PostProvider>
-        <AuthProvider>
-          <BrowserRouter>
-            <Navbar isLoggedIn={true} username={currentUser} />
-            <Routes>
-              <Route element={<PrivateRoutes />} />
+        <BrowserRouter>
+          <Navbar />
+          <Routes>
+            <Route element={<PrivateRoutes />}>
               <Route path="/" element={<Home />} />
-              <Route path="/login" element={<LoginComponent />} />
-              <Route path="/register" element={<RegisterComponent />} />
               <Route path="/newpost" element={<NewPostForm />} />
-            </Routes>
-          </BrowserRouter>
-        </AuthProvider>
+            </Route>
+            <Route path="/login" element={<LoginComponent />} />
+            <Route path="/register" element={<RegisterComponent />} />
+          </Routes>
+        </BrowserRouter>
       </PostProvider>
-    </UserContext.Provider>
+    </AuthProvider>
   );
 };
 
