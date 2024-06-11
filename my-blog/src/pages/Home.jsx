@@ -1,22 +1,33 @@
 import React, { useContext } from "react";
 import Post from "../components/Post";
-import { PostContext } from "../App";
+import { PostContext } from "../contexts/PostContext";
 import Postlist from "../components/Postlist";
-import { useAuth } from "../../contexts/authContext";
+import { useAuth } from "./../contexts/authContext";
 
 const Home = () => {
   const { currentUser } = useAuth();
-  return (
-    <div className="text-2xl font-bold pt-14">
-      Hello{" "}
-      {currentUser.displayName ? currentUser.displayName : currentUser.email},
-      you are now logged in.
-    </div>
-  );
+
   const { posts, handleDelete, handleUpdate } = useContext(PostContext);
 
   return (
     <div>
+      <div className="text-2xl font-bold pt-14">
+        Hello{" "}
+        {currentUser ? (
+          <div className="text-2xl font-bold pt-14">
+            Hello{" "}
+            {currentUser.displayName
+              ? currentUser.displayName
+              : currentUser.email}
+            , you are now logged in.
+          </div>
+        ) : (
+          <div className="text-2xl font-bold pt-14">
+            Loading user information...
+          </div>
+        )}
+      </div>
+
       <h2>Home Page</h2>
       {/* Render existing posts */}
       <Postlist />

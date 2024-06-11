@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { PostContext } from "../App";
+import { PostContext } from "../contexts/PostContext";
 
 const NewPostForm = () => {
   const [title, setTitle] = useState("");

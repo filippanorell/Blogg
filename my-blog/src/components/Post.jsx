@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
-import { UserContext, PostContext } from "../App";
+import { UserContext } from "../App";
+import { PostContext } from "../contexts/PostContext";
 
 const Post = ({ id, username, title, text, timestamp, comments }) => {
   const formattedTimestamp = new Date(timestamp).toLocaleString();
@@ -28,13 +29,14 @@ const Post = ({ id, username, title, text, timestamp, comments }) => {
       <div>{formattedTimestamp}</div>
       <div>
         <h3>Comments</h3>
-        {comments.map((comment, index) => (
-          <div key={index}>
-            <div>{comment.username}</div>
-            <div>{comment.text}</div>
-            <div>{new Date(comment.timestamp).toLocaleString()}</div>
-          </div>
-        ))}
+        {comments &&
+          comments.map((comment, index) => (
+            <div key={index}>
+              <div>{comment.username}</div>
+              <div>{comment.text}</div>
+              <div>{new Date(comment.timestamp).toLocaleString()}</div>
+            </div>
+          ))}
         <form onSubmit={handleSubmitComment}>
           <input
             type="text"

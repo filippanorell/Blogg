@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../../contexts/authContext";
-import { doSignOut } from "../../firebase/auth";
+import { useAuth } from "./../contexts/authContext";
+import { signOutUser } from "./../firebase/auth";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -12,7 +12,7 @@ const Navbar = () => {
         <>
           <button
             onClick={() => {
-              doSignOut().then(() => {
+              signOutUser().then(() => {
                 navigate("/login");
               });
             }}
@@ -28,6 +28,9 @@ const Navbar = () => {
           </Link>
           <Link className="text-sm text-blue-600 underline" to={"/register"}>
             Register New Account
+          </Link>
+          <Link className="text-sm text-blue-600 underline" to={"/newpost"}>
+            New post
           </Link>
         </>
       )}
