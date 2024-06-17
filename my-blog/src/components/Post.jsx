@@ -1,18 +1,22 @@
 import React, { useState, useContext } from "react";
 import { PostContext } from "../contexts/PostContext";
 import { AuthContext } from "../contexts/authContext";
+import { useAuth } from "../contexts/authContext";
 
 const Post = ({ id, username, title, text, timestamp, comments }) => {
   const formattedTimestamp = new Date(timestamp).toLocaleString();
   const [newComment, setNewComment] = useState("");
-  const { currentUser } = useContext(AuthContext);
   const { handleAddComment } = useContext(PostContext);
+  const { currentUser } = useAuth();
+
+  const { posts, handleDelete, handleUpdate } = useContext(PostContext);
+  console.log(posts);
 
   const handleSubmitComment = (e) => {
     e.preventDefault();
     if (newComment.trim() !== "") {
       const comment = {
-        username: currentUser,
+        username: currentUser.email,
         text: newComment,
         timestamp: new Date().getTime(),
       };

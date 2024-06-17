@@ -39,7 +39,11 @@ export function PostProvider({ children }) {
   };
 
   const handleUpdate = (index, updatedPost) => {
-    setPosts(posts.map((post, i) => (i === index ? updatedPost : post)));
+    setPosts(
+      posts.map((post, i) =>
+        i === index ? { ...post, text: updatedPost } : post
+      )
+    );
   };
 
   const handleAddComment = (postId, comment) => {

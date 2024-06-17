@@ -1,14 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Post from "../components/Post";
 import { PostContext } from "../contexts/PostContext";
-import Postlist from "../components/Postlist";
 import { useAuth } from "./../contexts/authContext";
 
 const Home = () => {
   const { currentUser } = useAuth();
-
+  const [edit, setEdit] = useState(false);
+  const [newText, setNewText] = useState();
   const { posts, handleDelete, handleUpdate } = useContext(PostContext);
-  console.log(posts);
 
   return (
     <div>
@@ -36,8 +35,24 @@ const Home = () => {
       {posts.map((post, index) => (
         <div key={index}>
           <Post {...post} />
-          <button onClick={() => handleDelete(index)}>Delete</button>
-          <button onClick={() => handleUpdate(index)}>Edit</button>
+
+          {currentUser.email === post.username && (
+            <>
+              {edit && (
+                <div>
+                  <input
+                    onChange={(e) => setNewText(e.target.value)}
+                    defaultValue={post.text}
+                  />
+                  <button onClick={() => handleUpdate(index, newText)}>
+                    Submit
+                  </button>
+                </div>
+              )}
+              <button onClick={() => handleDelete(index)}>Delete</button>
+              <button onClick={() => setEdit(true)}>Edit</button>
+            </>
+          )}
         </div>
       ))}
     </div>
