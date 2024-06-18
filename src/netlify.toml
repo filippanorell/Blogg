@@ -1,0 +1,4 @@
+[build]
+  base = "my-blog"
+  publish = "my-blog/dist"
+  command = "npm run build"
